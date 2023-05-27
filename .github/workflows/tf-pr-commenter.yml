@@ -4,9 +4,9 @@ on:
 
 env:
   tflintRulesExcluded: ""
-  tfLintAzureRulesVersion: v0.15.0
-  tfLintVersion: v0.36.1
-  tfsecVersion: v1.1.5
+  tfLintAzureRulesVersion: v0.23.0
+  tfLintVersion: v0.46.1
+  tfsecVersion: v1.28.1
 
 jobs:
   terraform:
@@ -20,16 +20,16 @@ jobs:
       - name: Setup tflint acr AzureRM plugin
         working-directory: ${{ github.workspace }}/src/Terraform/container-registry
         run: |
-            echo 'plugin "azurerm" {' >.tflint.hcl
-            echo '  enabled = true' >>.tflint.hcl
-            echo '}' >>.tflint.hcl
-            mkdir -p .tflint.d/plugins
-            cd .tflint.d/plugins
-            
-            curl -L "https://github.com/terraform-linters/tflint-ruleset-azurerm/releases/download/${{ env.tfLintAzureRulesVersion }}/tflint-ruleset-azurerm_linux_amd64.zip" -o tflint-AzRuleset.zip
-            unzip tflint-AzRuleset.zip
-            rm tflint-AzRuleset.zip
-            chmod +x tflint-ruleset-azurerm
+          echo 'plugin "azurerm" {' >.tflint.hcl
+          echo '  enabled = true' >>.tflint.hcl
+          echo '}' >>.tflint.hcl
+          mkdir -p .tflint.d/plugins
+          cd .tflint.d/plugins
+
+          curl -L "https://github.com/terraform-linters/tflint-ruleset-azurerm/releases/download/${{ env.tfLintAzureRulesVersion }}/tflint-ruleset-azurerm_linux_amd64.zip" -o tflint-AzRuleset.zip
+          unzip tflint-AzRuleset.zip
+          rm tflint-AzRuleset.zip
+          chmod +x tflint-ruleset-azurerm
 
       - name: tflint acr
         uses: reviewdog/action-tflint@master
@@ -45,16 +45,16 @@ jobs:
       - name: Setup tflint aas AzureRM plugin
         working-directory: ${{ github.workspace }}/src/Terraform/app-services
         run: |
-            echo 'plugin "azurerm" {' >.tflint.hcl
-            echo '  enabled = true' >>.tflint.hcl
-            echo '}' >>.tflint.hcl
-            mkdir -p .tflint.d/plugins
-            cd .tflint.d/plugins
-            
-            curl -L "https://github.com/terraform-linters/tflint-ruleset-azurerm/releases/download/${{ env.tfLintAzureRulesVersion }}/tflint-ruleset-azurerm_linux_amd64.zip" -o tflint-AzRuleset.zip
-            unzip tflint-AzRuleset.zip
-            rm tflint-AzRuleset.zip
-            chmod +x tflint-ruleset-azurerm
+          echo 'plugin "azurerm" {' >.tflint.hcl
+          echo '  enabled = true' >>.tflint.hcl
+          echo '}' >>.tflint.hcl
+          mkdir -p .tflint.d/plugins
+          cd .tflint.d/plugins
+
+          curl -L "https://github.com/terraform-linters/tflint-ruleset-azurerm/releases/download/${{ env.tfLintAzureRulesVersion }}/tflint-ruleset-azurerm_linux_amd64.zip" -o tflint-AzRuleset.zip
+          unzip tflint-AzRuleset.zip
+          rm tflint-AzRuleset.zip
+          chmod +x tflint-ruleset-azurerm
 
       - name: tflint aas
         uses: reviewdog/action-tflint@master
