@@ -2,6 +2,11 @@ name: TF PR Commenter
 on:
   pull_request:
 
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
 env:
   tflintRulesExcluded: ""
   tfLintAzureRulesVersion: v0.23.0
